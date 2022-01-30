@@ -1,6 +1,7 @@
 package com.sampleprojects.ecommercestore.productservice.controller.rest;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,7 +17,7 @@ public class ProductsController {
     return "Handled POST request";
   }
 
-  @PostMapping
+  @GetMapping
   public String getProducts() {
     return "Handled GET request for all products";
   }
