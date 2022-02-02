@@ -1,14 +1,16 @@
 package com.sampleprojects.ecommercestore.productservice.core.event;
 
 import java.math.BigDecimal;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Value;
 
-@Data
+@Value
+@Builder
 public class ProductCreatedEvent {
 
-  private String productId;
-  private String title;
-  private BigDecimal price;
-  private Integer quantity;
+  String productId;
+  String title;
+  BigDecimal price;
+  Integer quantity;
 
 }
