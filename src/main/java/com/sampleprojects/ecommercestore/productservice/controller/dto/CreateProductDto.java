@@ -1,4 +1,4 @@
-package com.sampleprojects.ecommercestore.productservice.controller.rest.dto;
+package com.sampleprojects.ecommercestore.productservice.controller.dto;
 
 import java.math.BigDecimal;
 import lombok.Data;

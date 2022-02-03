@@ -1,7 +1,7 @@
 package com.sampleprojects.ecommercestore.productservice.controller.rest;
 
 import com.sampleprojects.ecommercestore.productservice.command.CreateProductCommand;
-import com.sampleprojects.ecommercestore.productservice.controller.rest.dto.CreateProductDto;
+import com.sampleprojects.ecommercestore.productservice.controller.dto.CreateProductDto;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
