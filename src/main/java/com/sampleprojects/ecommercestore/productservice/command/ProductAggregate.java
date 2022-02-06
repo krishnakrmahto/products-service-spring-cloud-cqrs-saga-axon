@@ -20,15 +20,13 @@ public class ProductAggregate {
   private Integer quantity;
 
   /**
-   * Along validating common bean properties, validations in CommandHandler should also validate against
-   * the current state of the Aggregate, and/or against domain/business related rules since Aggregate contains
-   * business and decision-making logic.
+   * We may want to do bean validations at HTTP request level or perhaps in a MessageDispatchInterceptor implementation.
+   * Ideally, validations in CommandHandler should validate against the current state of the Aggregate, and/or against
+   * domain/business related rules since Aggregate contains business and decision-making logic.
    * @param createProductCommand
    */
   @CommandHandler
   public ProductAggregate(CreateProductCommand createProductCommand) {
-
-    validateBeanProperties(createProductCommand);
 
     /* *** More validations against current state of aggregate and other business logic related validations *** */
 
@@ -40,17 +38,6 @@ public class ProductAggregate {
         .build();
 
     AggregateLifecycle.apply(productCreatedEvent);
-  }
-
-  private void validateBeanProperties(CreateProductCommand createProductCommand) {
-    // Validate createProductCommand
-    if (createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("Price must be greater than 0");
-    }
-
-    if(createProductCommand.getTitle() != null && createProductCommand.getTitle().isBlank()) {
-      throw new IllegalArgumentException("Product title cannot be empty");
-    }
   }
 
   @EventSourcingHandler
