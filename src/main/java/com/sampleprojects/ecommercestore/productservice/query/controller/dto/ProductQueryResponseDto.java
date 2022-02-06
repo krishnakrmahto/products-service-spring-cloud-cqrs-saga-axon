@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ProductQueryDto {
+public class ProductQueryResponseDto {
 
   private String productId;
   private String title;
