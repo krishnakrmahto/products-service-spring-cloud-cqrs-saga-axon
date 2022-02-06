@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @ProcessingGroup("product-processors")
 @Component
 @RequiredArgsConstructor
-public class ProductLookupEventstHandler {
+public class ProductLookupEventsHandler {
 
   private final ProductLookupRepository productLookupRepository;
 

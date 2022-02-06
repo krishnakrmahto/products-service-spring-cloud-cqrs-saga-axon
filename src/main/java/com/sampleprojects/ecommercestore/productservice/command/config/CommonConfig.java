@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class CommonConfig {
 
   @Autowired
-  public void registerInterceptor(CommandBus commandBus) {
+  public void registerInterceptor(CommandBus commandBus,
+      CreateProductCommandDispatchInterceptor createProductCommandDispatchInterceptor) {
 
-    commandBus.registerDispatchInterceptor(new CreateProductCommandDispatchInterceptor());
-
+    commandBus.registerDispatchInterceptor(createProductCommandDispatchInterceptor);
   }
 }

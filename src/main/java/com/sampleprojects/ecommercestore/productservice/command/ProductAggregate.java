@@ -23,13 +23,12 @@ public class ProductAggregate {
    * We may want to do bean validations at HTTP request level or perhaps in a MessageDispatchInterceptor implementation.
    * Ideally, validations in CommandHandler should validate against the current state of the Aggregate, and/or against
    * domain/business related rules since Aggregate contains business and decision-making logic.
+   * MessageDispatchInterceptors are better place for the validations to live, that way the Aggregate class
+   * contains only the exact work.
    * @param createProductCommand
    */
   @CommandHandler
   public ProductAggregate(CreateProductCommand createProductCommand) {
-
-    /* *** Optional Bean validations *** */
-    /* *** More validations against current state of aggregate and other business logic related validations *** */
 
     ProductCreatedEvent productCreatedEvent = ProductCreatedEvent.builder()
         .productId(createProductCommand.getProductId())
