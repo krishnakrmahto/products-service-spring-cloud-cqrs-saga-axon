@@ -19,17 +19,18 @@ public class ProductAggregate {
   private BigDecimal price;
   private Integer quantity;
 
+  /**
+   * Along validating common bean properties, validations in CommandHandler should also validate against
+   * the current state of the Aggregate, and/or against domain/business related rules since Aggregate contains
+   * business and decision-making logic.
+   * @param createProductCommand
+   */
   @CommandHandler
   public ProductAggregate(CreateProductCommand createProductCommand) {
 
-    // Validate createProductCommand
-    if (createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("Price must be greater than 0");
-    }
+    validateBeanProperties(createProductCommand);
 
-    if(createProductCommand.getTitle() != null && createProductCommand.getTitle().isBlank()) {
-      throw new IllegalArgumentException("Product title cannot be empty");
-    }
+    /* *** More validations against current state of aggregate and other business logic related validations *** */
 
     ProductCreatedEvent productCreatedEvent = ProductCreatedEvent.builder()
         .productId(createProductCommand.getProductId())
@@ -39,6 +40,17 @@ public class ProductAggregate {
         .build();
 
     AggregateLifecycle.apply(productCreatedEvent);
+  }
+
+  private void validateBeanProperties(CreateProductCommand createProductCommand) {
+    // Validate createProductCommand
+    if (createProductCommand.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+      throw new IllegalArgumentException("Price must be greater than 0");
+    }
+
+    if(createProductCommand.getTitle() != null && createProductCommand.getTitle().isBlank()) {
+      throw new IllegalArgumentException("Product title cannot be empty");
+    }
   }
 
   @EventSourcingHandler
