@@ -28,6 +28,7 @@ public class ProductAggregate {
   @CommandHandler
   public ProductAggregate(CreateProductCommand createProductCommand) {
 
+    /* *** Optional Bean validations *** */
     /* *** More validations against current state of aggregate and other business logic related validations *** */
 
     ProductCreatedEvent productCreatedEvent = ProductCreatedEvent.builder()
