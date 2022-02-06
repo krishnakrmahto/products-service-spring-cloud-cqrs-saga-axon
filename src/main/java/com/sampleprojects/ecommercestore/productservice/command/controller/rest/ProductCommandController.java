@@ -3,6 +3,7 @@ package com.sampleprojects.ecommercestore.productservice.command.controller.rest
 import com.sampleprojects.ecommercestore.productservice.command.CreateProductCommand;
 import com.sampleprojects.ecommercestore.productservice.command.controller.dto.CreateProductDto;
 import java.util.UUID;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.core.env.Environment;
@@ -23,7 +24,7 @@ public class ProductCommandController {
   private final CommandGateway commandGateway;
 
   @PostMapping
-  public String createProduct(@RequestBody CreateProductDto createProductDto) {
+  public String createProduct(@RequestBody @Valid CreateProductDto createProductDto) {
 
     CreateProductCommand createProductCommand = CreateProductCommand.builder()
         .title(createProductDto.getTitle())
