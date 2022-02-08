@@ -1,5 +1,6 @@
 package com.sampleprojects.ecommercestore.productservice.command.controller.errorhandling;
 
+import org.axonframework.commandhandling.CommandExecutionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,6 +19,12 @@ public class ProductCommandExceptionHandler {
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public CommandErrorResponseDto handleAllOtherExceptions(Exception ex, WebRequest request) {
+    return new CommandErrorResponseDto(ex.getMessage());
+  }
+
+  @ExceptionHandler(CommandExecutionException.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public CommandErrorResponseDto handleAllOtherExceptions(CommandExecutionException ex, WebRequest request) {
     return new CommandErrorResponseDto(ex.getMessage());
   }
 }
